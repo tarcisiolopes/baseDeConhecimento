@@ -1,11 +1,13 @@
+const queries = require('./queries')
+
 module.exports = app => {
     const { existsOrError } = app.api.validation
 
     const save = (req, res) => {
         const article = { ...req.body }
-        if(req.params.id) article.id = req.params.id
+        if (req.params.id) article.id = req.params.id
 
-        try{
+        try {
             existsOrError(article.name, 'Nome nao informado')
             existsOrError(article.description, 'Descricao nao informada')
             existsOrError(article.categoryId, 'Categoria nao informada')
@@ -15,7 +17,7 @@ module.exports = app => {
             res.status(400).send(msg)
         }
 
-        if(article.id) {
+        if (article.id) {
             app.db('articles')
                 .update(article)
                 .where({ id: article.id })
@@ -32,11 +34,16 @@ module.exports = app => {
     const remove = async (req, res) => {
         try {
             const rowsDeleted = await app.db('articles')
-                .where({ id: req.params.id}).del()
-            existsOrError(rowsDeleted, 'Arquivo nao foi encontrado')
+                .where({ id: req.params.id }).del()
+
+            try {
+                existsOrError(rowsDeleted, 'Arquivo nao foi encontrado')
+            } catch (msg) {
+                return res.status(400).send(msg)
+            }
 
             res.status(200).send()
-        } catch(msg) {
+        } catch (msg) {
             res.status(500).send(msg)
         }
     }
@@ -66,5 +73,21 @@ module.exports = app => {
             .catch(err => res.status(500).send(err))
     }
 
-    return { save, remove, get, getById }
+    const getByCategory = async (req, res) => {
+        const categoryId = req.params.id
+        const page = req.query.page || 1
+        const categories = await app.db.raw(queries.categoryWithChildren, categoryId)
+        const ids = categories.rows.map(c => c.id)
+
+        app.db({ a: 'articles', u: 'users' })
+            .select('a.id', 'a.name', 'a.description', 'a.imageUrl', { author: 'u.name' })
+            .limit(limit).offset(page * limit - limit)
+            .whereRaw('?? = ??', ['u.id', 'a.userId'])
+            .whereIn('categoryId', ids)
+            .orderBy('a.id', 'desc')
+            .then(articles => res.json(articles))
+            .catch(err => res.status(500).send(err))
+    }
+
+    return { save, remove, get, getById, getByCategory }
 }
