@@ -40,12 +40,12 @@ module.exports = app => {
                 .update(user)
                 .where({ id: user.id })
                 // .whereNull('deletedAt')
-                .then(_ => res.status(204).send())
+                .then(_ => res.status(200).send())
                 .catch(err => res.status(500).send(err))
         } else {
             app.db('users')
                 .insert(user)
-                .then(_ => res.status(204).send())
+                .then(_ => res.status(201).send())
                 .catch(err => res.status(500).send(err))
         }
     }
