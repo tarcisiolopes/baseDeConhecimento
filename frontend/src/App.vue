@@ -1,6 +1,9 @@
 <template>
 	<div id="app" :class="{'hide-menu': !isMenuVisible}">
-		<Header title="Base de conhecimento - VueJS" :hideToggle="false"/>
+		<Header title="Base de conhecimento - VueJS" 
+			:hideToggle="false"
+			:hideUserDropwdown="false"
+			/>
 		<Menu />
 		<Content />
 		<Footer />
