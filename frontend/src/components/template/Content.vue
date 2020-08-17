@@ -1,6 +1,6 @@
 <template>
     <div class="content">
-
+        <router-view></router-view>
     </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style>
-    .contend {
+    .content {
         grid-area: content;
         background-color: #efefef;
         padding: 20px;
