@@ -15,20 +15,20 @@ const routes = [{
     name: 'home',
     path: '/',
     component: Home
-},{
+}, {
     name: 'adminPages',
     path: '/admin',
     component: AdminPages,
     meta: { requiresAdmin: true }
-},{
+}, {
     name: 'articlesByCategory',
     path: '/categories/:id/articles',
     component: ArticlesByCategory
-},{
+}, {
     name: 'articleById',
     path: '/articles/:id',
     component: ArticleById
-},{
+}, {
     name: 'auth',
     path: '/auth',
     component: Auth
@@ -42,12 +42,12 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
     const json = localStorage.getItem(userKey)
 
-    if(to.matched.some(record => record.meta.requiresAdmin)){
+    if (to.matched.some(record => record.meta.requiresAdmin)) {
         const user = JSON.parse(json)
-        user && user.admin ? next() : next({ path: '/'})
+        user && user.admin ? next() : next({ path: '/' })
     } else {
         next()
     }
 })
 
-export default router 
+export default router

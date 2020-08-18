@@ -11,7 +11,7 @@
               v-model="user.name"
               required
               :readonly="mode === 'remove'"
-              placeholder="Informe o Nome do Usuário"
+              placeholder="Informe o Nome do Usuário..."
             />
           </b-form-group>
         </b-col>
@@ -23,19 +23,17 @@
               v-model="user.email"
               required
               :readonly="mode === 'remove'"
-              placeholder="Informe o E-mail do Usuário"
+              placeholder="Informe o E-mail do Usuário..."
             />
           </b-form-group>
         </b-col>
       </b-row>
-
       <b-form-checkbox
         id="user-admin"
-        v-model="user.admin"
         v-show="mode === 'save'"
+        v-model="user.admin"
         class="mt-3 mb-3"
       >Administrador?</b-form-checkbox>
-
       <b-row v-show="mode === 'save'">
         <b-col md="6" sm="12">
           <b-form-group label="Senha:" label-for="user-password">
@@ -44,27 +42,26 @@
               type="password"
               v-model="user.password"
               required
-              placeholder="Informe a senha"
+              placeholder="Informe a Senha do Usuário..."
             />
           </b-form-group>
         </b-col>
         <b-col md="6" sm="12">
-          <b-form-group label="Confirmação da senha:" label-for="user-confirm-password">
+          <b-form-group label="Confirmação de Senha:" label-for="user-confirm-password">
             <b-form-input
               id="user-confirm-password"
               type="password"
               v-model="user.confirmPassword"
               required
-              placeholder="Confirme a senha"
+              placeholder="Confirme a Senha do Usuário..."
             />
           </b-form-group>
         </b-col>
       </b-row>
-
       <b-row>
         <b-col xs="12">
           <b-button variant="primary" v-if="mode === 'save'" @click="save">Salvar</b-button>
-          <b-button variant="danger" v-if="mode === 'remove'" @click="save">Excluir</b-button>
+          <b-button variant="danger" v-if="mode === 'remove'" @click="remove">Excluir</b-button>
           <b-button class="ml-2" @click="reset">Cancelar</b-button>
         </b-col>
       </b-row>
@@ -84,8 +81,8 @@
 </template>
 
 <script>
-import axios from "axios";
 import { baseApiUrl, showError } from "@/global";
+import axios from "axios";
 
 export default {
   name: "UserAdmin",

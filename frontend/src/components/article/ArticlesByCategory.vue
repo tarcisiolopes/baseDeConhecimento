@@ -3,7 +3,7 @@
     <PageTitle icon="fa fa-folder-o" :main="category.name" sub="Categoria" />
     <ul>
       <li v-for="article in articles" :key="article.id">
-          <ArticleItem :article="article" />
+        <ArticleItem :article="article" />
       </li>
     </ul>
     <div class="load-more">
@@ -20,7 +20,7 @@
 import { baseApiUrl } from "@/global";
 import axios from "axios";
 import PageTitle from "../template/PageTitle";
-import ArticleItem from './ArticleItem'
+import ArticleItem from "./ArticleItem";
 
 export default {
   name: "ArticlesByCategory",
@@ -50,14 +50,14 @@ export default {
   },
   watch: {
     $route(to) {
-      this.category.id = to.params.id
-      this.articles = []
-      this.page = 1
-      this.loadMore = true
+      this.category.id = to.params.id;
+      this.articles = [];
+      this.page = 1;
+      this.loadMore = true;
 
-      this.getCategory()
-      this.getArticles()
-    }
+      this.getCategory();
+      this.getArticles();
+    },
   },
   mounted() {
     this.category.id = this.$route.params.id;
@@ -68,15 +68,15 @@ export default {
 </script>
 
 <style>
-    .articles-by-category ul{
-        list-style-type: none;
-        padding: 0;
-    }
+.articles-by-category ul {
+  list-style-type: none;
+  padding: 0px;
+}
 
-    .articles-by-category .load-more {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 25px;
-    }
+.articles-by-category .load-more {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 25px;
+}
 </style>

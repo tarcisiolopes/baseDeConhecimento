@@ -3,11 +3,13 @@ import Vue from 'vue'
 
 import App from './App'
 
-import store from './config/store'
 import './config/bootstrap'
-import router from './config/router'
 import './config/msgs'
 import './config/axios'
+import './config/mq'
+
+import store from './config/store'
+import router from './config/router'
 
 Vue.config.productionTip = false
 

@@ -12,14 +12,14 @@
           placeholder="Informe o Nome do Artigo..."
         />
       </b-form-group>
-      <b-form-group label="Descrição:" label-for="article-description">
+      <b-form-group label="Descrição" label-for="article-description">
         <b-form-input
           id="article-description"
           type="text"
           v-model="article.description"
           required
           :readonly="mode === 'remove'"
-          placeholder="Informe a descrição do Artigo..."
+          placeholder="Informe o Nome do Artigo..."
         />
       </b-form-group>
       <b-form-group v-if="mode === 'save'" label="Imagem (URL):" label-for="article-imageUrl">
@@ -29,7 +29,7 @@
           v-model="article.imageUrl"
           required
           :readonly="mode === 'remove'"
-          placeholder="Informe a URL da imagem..."
+          placeholder="Informe a URL da Imagem..."
         />
       </b-form-group>
       <b-form-group v-if="mode === 'save'" label="Categoria:" label-for="article-categoryId">
@@ -38,8 +38,8 @@
       <b-form-group v-if="mode === 'save'" label="Autor:" label-for="article-userId">
         <b-form-select id="article-userId" :options="users" v-model="article.userId" />
       </b-form-group>
-      <b-form-group v-if="mode === 'save'" label="Conteúdo:" label-for="category-content">
-        <VueEditor v-model="article.content" placeholder="Informe o conteúdo do artigo..." />
+      <b-form-group v-if="mode === 'save'" label="Conteúdo" label-for="article-content">
+        <VueEditor v-model="article.content" placeholder="Informe o Conteúdo do Artigo..." />
       </b-form-group>
       <b-button variant="primary" v-if="mode === 'save'" @click="save">Salvar</b-button>
       <b-button variant="danger" v-if="mode === 'remove'" @click="remove">Excluir</b-button>
@@ -145,8 +145,8 @@ export default {
   },
   watch: {
     page() {
-      this.loadArticles()
-    }
+      this.loadArticles();
+    },
   },
   mounted() {
     this.loadUsers();
