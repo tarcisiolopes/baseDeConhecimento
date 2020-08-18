@@ -7,6 +7,7 @@ import store from './config/store'
 import './config/bootstrap'
 import router from './config/router'
 import './config/msgs'
+import './config/axios'
 
 Vue.config.productionTip = false
 
