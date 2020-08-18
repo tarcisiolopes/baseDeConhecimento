@@ -1,6 +1,6 @@
+import axios from 'axios'
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -10,8 +10,8 @@ export default new Vuex.Store({
         user: null
     },
     mutations: {
-        toggleMenu(state, isVisible){
-            if(!state.user){
+        toggleMenu(state, isVisible) {
+            if(!state.user) {
                 state.isMenuVisible = false
                 return
             }
@@ -31,8 +31,6 @@ export default new Vuex.Store({
                 delete axios.defaults.headers.common['Authorization']
                 state.isMenuVisible = false
             }
-
         }
-
     }
 })
